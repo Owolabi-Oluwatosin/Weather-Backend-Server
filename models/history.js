@@ -9,6 +9,9 @@ const HistorySchema = new mongoose.Schema({
     },
     pressure: {
         type: String
+    },
+    name: {
+        type: String
     }
 },{
     timestamps: true,

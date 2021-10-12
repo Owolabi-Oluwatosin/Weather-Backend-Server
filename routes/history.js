@@ -17,14 +17,15 @@ router.get("/get-all-history", (req, res) => {
 
 //getting data from the frontend and saving it in our database
 router.post(`/create-history`, (req, res) => {
-    const { temp, humidity, pressure } = req.body;
-    if (!temp && !humidity && !pressure) {
+    const { temp, humidity, pressure, name } = req.body;
+    if (!temp && !humidity && !pressure && !name) {
         return res.status(422).json({ error: "Something went wrong" });
     } else {
         const _History = new History({
             temp,
             humidity,
-            pressure
+            pressure,
+            name
         });
         _History.save().then(data => {
             if(data){
@@ -65,7 +66,7 @@ const deleteHistory = () => {
 //calling deleteHistory function created above after every 30 days
 setInterval(() => {
     deleteHistory();
-}, 5000);
+}, 1000);
 
 
 module.exports = router;
